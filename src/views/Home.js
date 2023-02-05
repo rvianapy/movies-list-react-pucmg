@@ -1,31 +1,31 @@
+import { useEffect, useState } from "react";
+import { MoviesService } from "../api/MoviesService";
+
 import { Movie } from "../components/Movie";
 
-export const Home = () => (
-  <div className="container">
-    <div className="row gy-5">
-      <div className="col-3">
-        <Movie />
-      </div>
+export const Home = () => {
+  const [movies, setMovies] = useState([]);
 
-      <div className="col-3">
-        <Movie />
-      </div>
+  const getMovies = async () => {
+    const {
+      data: { results },
+    } = await MoviesService.getMovies();
+    setMovies(results);
+  };
 
-      <div className="col-3">
-        <Movie />
-      </div>
+  useEffect(() => {
+    getMovies();
+  }, []);
 
-      <div className="col-3">
-        <Movie />
-      </div>
-
-      <div className="col-3">
-        <Movie />
-      </div>
-
-      <div className="col-3">
-        <Movie />
+  return (
+    <div className="container">
+      <div className="row gy-5">
+        {movies.map((movie) => (
+          <div key={movie.id} className="col-3">
+            <Movie movie={movie} />
+          </div>
+        ))}
       </div>
     </div>
-  </div>
-);
+  );
+};
