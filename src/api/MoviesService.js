@@ -8,4 +8,8 @@ export class MoviesService {
   static getMovies() {
     return axios(withBaseURL("movie/popular"));
   }
+
+  static getMovieDetail(id) {
+    return axios(withBaseURL(`movie/${id}`));
+  }
 }

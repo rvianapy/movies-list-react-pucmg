@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export const Movie = ({ movie }) => (
   <div className="movie-item">
     <div>
@@ -8,9 +10,9 @@ export const Movie = ({ movie }) => (
     </div>
     <div className="movie-excerpt">
       <h3>{movie.title}</h3>
-      <a className="btn btn-primary" href="#">
+      <Link to={`/movie/${movie.id}`} className="btn btn-primary">
         Ver detalhes
-      </a>
+      </Link>
     </div>
   </div>
 );
